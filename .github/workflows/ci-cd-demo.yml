@@ -1,0 +1,27 @@
+name: django-deployment-yaml
+on:
+    push:
+ branches:
+            - main
+
+
+jobs:
+    django-job-run:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Do code checkout
+              uses: actions/checkout@v7
+            - name: Install python new version
+              uses: actions/setup-python@v7
+              with:
+                python-version: '3.13'    
+            - name: Install Dependencies
+              run: |
+                python -m pip upgrade pip
+                pip install -r requirements.txt
+            - name: Collect Static Files
+              run: |
+                python manage.py collectstatic --noinput
+            - name: Run Tests
+              run: |
+                python manage.py test
