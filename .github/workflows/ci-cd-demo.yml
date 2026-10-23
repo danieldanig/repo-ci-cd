@@ -1,7 +1,7 @@
 name: django-deployment-yaml
 on:
     push:
- branches:
+branches:
             - main
 
 
